@@ -35,39 +35,17 @@ public class Graph {
     // 2. Update neighbors
     for (int i = 0; i < this.getNbRows(); i++) {
       for(int j = 0; j< this.getNbCols(); j++) {
-        // TODO: Simplify code above if possible
         // 2.1 check left, right, top, bottom
-        
-        // left:
-        int left_i = i;
-        int left_j = j - 1;
-        if(checkCoord(left_i, left_j)) {
-          // Add neighbor:
-          vertices[i][j].addNeighbor(vertices[left_i][left_j]);
-        }
-        
-        // right:
-        int right_i = i;
-        int right_j = j + 1;
-        if(checkCoord(right_i, right_j)) {
-          // Add neighbor:
-          vertices[i][j].addNeighbor(vertices[right_i][right_j]);
-        };
-        
-        // top:
-        int top_i = i - 1;
-        int top_j = j;
-        if(checkCoord(top_i, top_j)) {
-          // Add neighbor:
-          vertices[i][j].addNeighbor(vertices[top_i][top_j]);
-        }
-        
-        // bottom
-        int bottom_i = i + 1;
-        int bottom_j = j;
-        if(checkCoord(bottom_i, bottom_j)){
-          // Add neighbor:
-          vertices[i][j].addNeighbor(vertices[bottom_i][bottom_j]);
+        // 2.1.1 for each direction compute row and col.
+        // e.g for left we have row = i and col = j -1
+        int[] operations = {i, j-1, i, j+1, i-1, j, i+1, j};
+        int row, col;
+        for (int k = 0; k < operations.length; k+=2) {
+          row = operations[k];
+          col = operations[k+1];
+          if(checkCoord(row, col)) {
+            vertices[i][j].addNeighbor(vertices[row][col]);
+          }
         }
       }
     }
@@ -135,7 +113,7 @@ public class Graph {
 
   public static void main(String[] args) {
     // 1. Create Graph
-    Graph graph = new Graph(4, 4);
+    Graph graph = new Graph(3, 3);
     
     // 2. Test features
     graph.getVertex(0, 0).setType(Type.START);
