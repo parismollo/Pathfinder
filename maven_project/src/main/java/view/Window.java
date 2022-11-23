@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Graph;
+
 public class Window extends JFrame
 {
 	private static final long serialVersionUID = 1L;
@@ -22,9 +24,20 @@ public class Window extends JFrame
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		this.requestFocus();
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
+
+		setGridView(new Graph(20, 20));
 
 		this.setVisible(true);
+	}
+
+	public void setGridView(Graph graph) {
+		this.getContentPane().removeAll();
+		this.setResizable(true);
+		this.getContentPane().add(new GridView(graph));
+		revalidate();
+		repaint();
 	}
 
     public void setupPan(JPanel pan) {
