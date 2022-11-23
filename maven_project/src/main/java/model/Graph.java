@@ -3,8 +3,8 @@ package model;
 import model.Vertex.Type;
 
 public class Graph {
-  static final int MAX_ROWS = 10;
-  static final int MAX_COLS = 10;
+  static final int MAX_ROWS = 999;
+  static final int MAX_COLS = 999;
 
   private final int rows, cols;
   private Vertex[][] vertices;
