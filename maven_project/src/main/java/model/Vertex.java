@@ -62,14 +62,61 @@ public class Vertex {
   }
 
   public void setType(Type type) {
+    switch (type) {
+      case END:
+        this.setColor(Color.BLUE);
+        break;
+      case START:
+        this.setColor(Color.GREEN);
+        break;
+      case WALL:
+        this.setColor(Color.YELLOW);
+        break;
+      default:
+        this.setColor(Color.WHITE);
+        break;
+    }
     this.type = type;
   }
 
+  public String getIcon() {
+    switch (this.getType()) {
+      case WALL:
+        return "X";
+      case START:
+        return "S";
+      case END:
+        return "E"; 
+      default:
+        return String.valueOf(this.getId());
+    }
+  }
+
   public String toString() {
-    return String.format("\u001b[31m[\u001b[0m%d\u001b[31m]\u001b[0m", this.getId());
+    return String.format("\u001b[31m["+getStrColor(1)+"%s"+getStrColor(0)+"\u001b[31m"+"]"+getStrColor(0), this.getIcon());
   }
 
   public String displayNeighbors() {
-    return String.format("[%d]: %s", this.getId(), this.getNeighbors().toString());
+    return String.format("[%s]: %s", this.getId(), this.getNeighbors().toString());
+  }
+
+  private String getStrColor(int x) {
+    if(x == 1) { // Update Vertex Color based on Type
+      switch (this.getType()) {
+        case WALL:
+          return "\u001b[33m"; // Yellow
+        case START:
+          return "\u001b[32m"; // Green
+        case END:
+          return "\u001b[34m"; // Blue
+        default:
+          return "\u001b[37m"; // White
+      }
+    }
+    if(x == 0) {
+      return "\u001b[0m"; // Reset Color
+    }
+
+    return null;
   }
 }

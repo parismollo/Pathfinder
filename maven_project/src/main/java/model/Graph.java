@@ -1,5 +1,7 @@
 package model;
 
+import model.Vertex.Type;
+
 public class Graph {
   private final int rows, cols;
   private Vertex[][] vertices;
@@ -67,6 +69,8 @@ public class Graph {
   }
 
   public Vertex getVertex(int i, int j) {
+    if(checkCoord(i, j))
+      return this.vertices[i][j];
     return null;
   }
 
@@ -105,10 +109,13 @@ public class Graph {
     
   }
 
-  // TODO: create test on terminal
   public static void main(String[] args) {
     // 1. Create Graph
     Graph graph = new Graph(3, 3);
+    // 1.5 Test features
+    graph.getVertex(0, 0).setType(Type.START);
+    graph.getVertex(2, 2).setType(Type.END);
+    graph.getVertex(1, 1).setType(Type.WALL);
     // 2. Display Vertices
     System.out.println(graph);
     System.out.println(graph.showNeighbors());
