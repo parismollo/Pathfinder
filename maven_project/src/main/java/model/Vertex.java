@@ -9,7 +9,7 @@ public class Vertex {
 
   // Private enum type:
   public enum Type {
-    WALL("Wall"), PATH("Path"), START("Start"), END("End");
+    WALL("Wall"), PATH("Path"), START("Start"), END("End"), SHTPATH("Shorter_Path"); 
     
     private String custom;
     
@@ -43,7 +43,9 @@ public class Vertex {
   }
 
   private int increaseCounter() {
-    return counter+=1;
+    int current_id = counter; 
+    Vertex.counter+=1;
+    return current_id;
   }
 
   public int getId() {
@@ -99,6 +101,8 @@ public class Vertex {
       case WALL:
         this.setColor(Color.YELLOW);
         break;
+      case SHTPATH:
+        this.setColor(Color.ORANGE);
       default:
         this.setColor(Color.WHITE);
         break;
@@ -114,6 +118,8 @@ public class Vertex {
         return "S";
       case END:
         return "E"; 
+      case SHTPATH:
+        return "*";
       default:
         return String.valueOf(this.getId());
     }
@@ -136,6 +142,8 @@ public class Vertex {
           return "\u001b[32m"; // Green
         case END:
           return "\u001b[34m"; // Blue
+        case SHTPATH:
+          return "\u001b[36m";
         default:
           return "\u001b[37m"; // White
       }

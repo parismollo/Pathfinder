@@ -83,7 +83,7 @@ public class Graph {
     return s;
   }
 
-  public String getSpaces(Vertex v) {
+  private String getSpaces(Vertex v) {
     String s = "";
     int numberOfDigits = v.getIcon().length();
     switch (numberOfDigits) {
