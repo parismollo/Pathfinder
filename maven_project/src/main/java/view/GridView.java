@@ -16,6 +16,7 @@ public class GridView extends JPanel {
     private Vertex.Type state = Type.START; // Time to put a Wall or start, end points
 
     private boolean firstSteps = true, putStartEnd;
+    private Type itemToDrag = Type.END; // END par défaut. Si END, on considère qu'il n'y a rien.
 
     public GridView(Graph graph) {
         this.graph = graph;
@@ -79,6 +80,12 @@ public class GridView extends JPanel {
         this.graph = graph;
     }
 
+    public Type getItemToDrag() {
+        return itemToDrag;
+    }
 
+    public void setItemToDrag(Type item) {
+        this.itemToDrag = item;
+    }
 
 }

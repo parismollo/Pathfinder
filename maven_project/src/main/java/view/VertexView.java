@@ -35,10 +35,35 @@ public class VertexView extends JPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
+                Type state = gridView.getState();
+                if(!isStartOrEnd(state))
+                    if(vertex.getType() == Type.WALL || vertex.getType() == Type.PATH)
+                        gridView.setItemToDrag(vertex.getType() == Type.WALL ? Type.PATH : Type.WALL); // WALL OU PATH
                 refreshType();
                 setBackground(vertex.getColor());
             }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+                gridView.setItemToDrag(Type.END);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                super.mouseEntered(e);
+                Type dragItem = gridView.getItemToDrag();
+                if(dragItem != Type.END && !isStartOrEnd(vertex.getType())) {
+                    vertex.setType(dragItem);
+                    setBackground(vertex.getColor());
+                }
+            }
+
         });
+    }
+
+    public boolean isStartOrEnd(Type type) {
+        return type == Type.START || type == Type.END;
     }
 
     private void refreshType() {

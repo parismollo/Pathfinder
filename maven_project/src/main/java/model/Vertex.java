@@ -158,4 +158,25 @@ public class Vertex {
 
     return null;
   }
+
+  public boolean isWall() {
+    return type == Type.WALL;
+  }
+
+  public boolean isStart() {
+    return type == Type.START;
+  }
+
+  public boolean isEnd() {
+    return type == Type.END;
+  }
+
+  public boolean isPath() {
+    return type == Type.PATH;
+  }
+
+  public boolean isShorterPath() {
+    return type == Type.SHTPATH;
+  }
+
 }
