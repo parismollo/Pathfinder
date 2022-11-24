@@ -2,6 +2,7 @@ package model;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 
@@ -68,7 +69,10 @@ public class Vertex {
     if(all) {
       return new ArrayList<>(this.neighbors);
     }else {
-      List<Vertex> l = this.neighbors.stream().filter(n -> n.getType() != Type.WALL).toList();
+      // Java 16:
+      // List<Vertex> l = this.neighbors.stream().filter(n -> n.getType() != Type.WALL).toList();
+      // Java 8:
+      List<Vertex> l = this.neighbors.stream().filter(n -> n.getType() != Type.WALL).collect(Collectors.toList());
       return new ArrayList<>(l);
     }
   }

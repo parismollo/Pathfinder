@@ -93,6 +93,9 @@ public class Astar {
     Vertex end = graph.getVertex(2, 2);
     end.setType(Type.END);
 
+    Vertex mid = graph.getVertex(0, 1);
+    mid.setType(Type.WALL);
+
     System.out.println(graph);
     Astar.run(graph, start, end);
    
@@ -107,7 +110,7 @@ public class Astar {
     Collections.reverse(path);
     System.out.println("PATH: "+path+"\n\n");
 
-    
+
     for (Vertex vertex : path) {
       if(vertex.getType() != Type.END && vertex.getType() != Type.START) {
         vertex.setType(Type.SHTPATH);
