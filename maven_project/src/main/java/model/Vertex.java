@@ -1,6 +1,7 @@
 package model;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -27,10 +28,18 @@ public class Vertex {
   private Color color = Color.WHITE;
   private ArrayList<Vertex> neighbors;
   private Type type = Type.PATH;
+  private int cost = 1; // Default cost
+  private int x, y; // Coordinates in the grid
 
   public Vertex() {
     this.id = increaseCounter();
     this.neighbors = new ArrayList<>();
+  }
+
+  public Vertex(int x, int y) {
+    this();
+    this.x = x;
+    this.y = y;
   }
 
   private int increaseCounter() {
@@ -49,9 +58,27 @@ public class Vertex {
     this.color = color;
   }
 
-  public ArrayList<Vertex> getNeighbors() {
-    return new ArrayList<>(this.neighbors);
+  public int getCost() {
+    return cost;
   }
+
+  public ArrayList<Vertex> getNeighbors(boolean all) {
+    if(all) {
+      return new ArrayList<>(this.neighbors);
+    }else {
+      List<Vertex> l = this.neighbors.stream().filter(n -> n.getType() != Type.WALL).toList();
+      return new ArrayList<>(l);
+    }
+  }
+
+  public int getX() {
+    return this.x;
+  }
+
+  public int getY() {
+    return this.y;
+  }
+
 
   public boolean addNeighbor(Vertex neighbor) {
     return this.neighbors.add(neighbor);
@@ -97,7 +124,7 @@ public class Vertex {
   }
 
   public String displayNeighbors() {
-    return String.format("[%s]: %s", this.getId(), this.getNeighbors().toString());
+    return String.format("[%s]: %s", this.getId(), this.getNeighbors(true).toString());
   }
 
   private String getStrColor(int x) {

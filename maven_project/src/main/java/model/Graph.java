@@ -28,7 +28,7 @@ public class Graph {
     this.vertices = new Vertex[this.getNbRows()][this.getNbCols()];
     for(int i = 0; i < this.getNbRows(); i++) {
       for(int j = 0; j < this.getNbCols(); j++) {
-        vertices[i][j] = new Vertex();
+        vertices[i][j] = new Vertex(i, j);
       }
     }
     
@@ -123,5 +123,7 @@ public class Graph {
     // 3. Display Vertices
     System.out.println(graph);
     System.out.println(graph.showNeighbors());
+    // System.out.println(graph.getVertex(0, 1).getNeighbors(false));
+
   }
 }
