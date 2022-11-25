@@ -44,3 +44,13 @@ Car c'est le nombre de deplacement en abcisse possible parmis le nombre de depla
 Si t'as longueur 6 et 3 deplacements en abcisse à faire alors ça revient à faire un 3-uplets de 3 deplacements en abcisses sans repetitions, l'ordre compte. A comprendre mieux.
 
 
+2. **Borne maximale du nombre de chemins dans une grille**
+
+Dans une grille sans mur de longueur l et hauteur h, la taille maximale d'un chemin est l+h. 
+C'est le chemin minimal entre le point de depart de coordonnée (0,0), et le point d'arrivée de coordonnée (h,l) par exemple.
+Le nombre de chemins de taille minimale entre ces 2 points est la borne maximale du nombre de chemin dans une grille.
+En effet le nombre de chemins entre ces 2 points, d'après les conclusions de la partie précédente, est :
+(l+h)! / (h! + l!)
+ce qui est supérieur à un chemin qui aurait moins de deplacements en abcisses ou en ordonnées (demontrer ?) et il ne peut pas y avoir plus de deplacements en abcisse que l, et que h en ordonnée.
+
+Grand O ?
