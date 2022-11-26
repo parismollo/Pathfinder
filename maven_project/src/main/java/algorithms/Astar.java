@@ -72,6 +72,7 @@ public class Astar {
         if(totalCost < distances[neighbor.getId()]) {
           distances[neighbor.getId()] = totalCost;
           // TODO: optimize by updating key instead of adding a new one:
+          ////////// Hey Paris. Maybe you can look Dijkstra.java
           // BUG: I think there is a bug on the heuristics 
           Tuple newTuple = new Tuple(neighbor, totalCost + heuristic(end, neighbor));
           pq.add(newTuple);
@@ -99,6 +100,9 @@ public class Astar {
     System.out.println(graph);
     Astar.run(graph, start, end);
    
+    ////////// Hey Paris. Maybe you can look Dijkstra.java
+
+    //////////////// This is the setShortPath defined in Dijkstra.java
     ArrayList<Vertex> path = new ArrayList<>();
     Vertex next = end;
     while (next.getId() != start.getId()) {
@@ -110,13 +114,13 @@ public class Astar {
     Collections.reverse(path);
     System.out.println("PATH: "+path+"\n\n");
 
-
     for (Vertex vertex : path) {
       if(vertex.getType() != Type.END && vertex.getType() != Type.START) {
         vertex.setType(Type.SHTPATH);
       }
-
     }
+    ///////////////
+
     // System.out.println("");
     // for (int d : distances) {
     //   System.out.print(d+" ");

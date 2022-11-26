@@ -158,7 +158,7 @@ public class Vertex {
 
     return null;
   }
-
+  
   public boolean isWall() {
     return type == Type.WALL;
   }
