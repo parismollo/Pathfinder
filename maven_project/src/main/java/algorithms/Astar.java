@@ -108,6 +108,9 @@ public class Astar {
     System.out.println(graph);
     Astar.run(graph, start, end);
    
+    ////////// Hey Paris. Maybe you can look Dijkstra.java
+
+    //////////////// This is the setShortPath defined in Dijkstra.java
     ArrayList<Vertex> path = new ArrayList<>();
     Vertex next = end;
     while (next.getId() != start.getId()) {
@@ -123,7 +126,6 @@ public class Astar {
       if(vertex.getType() != Type.END && vertex.getType() != Type.START) {
         vertex.setType(Type.SHTPATH);
       }
-
     }
     System.out.println(graph);
   }
