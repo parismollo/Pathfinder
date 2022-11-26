@@ -1,8 +1,6 @@
 package algorithms;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
 import java.util.PriorityQueue;
 
 import model.Graph;
@@ -15,28 +13,9 @@ public class Astar {
   public static int distances[];
   public static Vertex previous[];
 
-  private static class Tuple {
-    private Vertex vertex;
-    private int totalCostFrmStart;
-    
-    private Tuple(Vertex v, int w) {
-      this.vertex = v;
-      // This represents distance from source + weight + heuristics:
-      this.totalCostFrmStart = w;
-    }
-
-    public String toString() {
-      return String.format("[id: %d, distance:%d]",this.vertex.getId(), this.totalCostFrmStart);
-    }
-  }
-
-  private static class TupleComparator implements Comparator<Tuple> {
-    @Override
-    public int compare(Tuple arg0, Tuple arg1) {
-      // returns a negative integer, zero, or a positive integer
-      // as the first argument is less than, equal to, or greater than the second.
-      return arg0.totalCostFrmStart < arg1.totalCostFrmStart  ? -1 : 1;
-    }
+  public static void run(Graph graph) {
+    // getStart(), getEnd()
+    run(graph, null, null);
   }
 
   private static int heuristic(Vertex end, Vertex current) {
@@ -44,12 +23,11 @@ public class Astar {
     return Math.abs(end.getX() - current.getX()) + Math.abs(end.getY() - current.getY());
   }
 
-  public static void run(Graph graph, Vertex start, Vertex end) {
-
+  public static int[] run(Graph graph, Vertex start, Vertex end) {
     // Create distances and previous array:
     distances = new int[graph.getNbCols() * graph.getNbRows()];
     previous = new Vertex[graph.getNbCols() * graph.getNbRows()];
-
+    
     // Set all distances to infinity and previous to -1:
     for (int i = 0; i < previous.length; i++) {
       distances[i] = Integer.MAX_VALUE;
@@ -59,40 +37,34 @@ public class Astar {
     previous[start.getId()] = start;
 
     // Create PQ:
-    PriorityQueue<Tuple> pq = new PriorityQueue<>(new TupleComparator());
-    pq.add(new Tuple(start, distances[start.getId()]));
+    PriorityQueue<Tuple> pq = Dijkstra.makeQueue(graph);
     // Loop while not empty:
     while (!pq.isEmpty()) {
       // Get min value in PQ:
       Tuple current = pq.poll();
       // Stop if found end vertex:
-      if(current.vertex.getId() == end.getId()) {
-        System.out.println("Found it!");
-        // TODO: Return distances, previous?
+      if(current.getVertex().getId() == end.getId()) {
         break;
       }
       // Loop over each neighbor (which not walls):
-      for (Vertex neighbor : current.vertex.getNeighbors(false)) {
+      for (Vertex neighbor : current.getVertex().getNeighbors(false)) {
         // Get total cost:
-        int totalCost = distances[current.vertex.getId()] + neighbor.getCost();
+        int totalCost = distances[current.getVertex().getId()] + neighbor.getCost();
         // Only update if smaller cost:
         if(totalCost < distances[neighbor.getId()]) {
           distances[neighbor.getId()] = totalCost;
-          // Updates PQ
-          Tuple newTuple = new Tuple(neighbor, totalCost + heuristic(end, neighbor));
-          // TODO: optimize by updating key instead of adding a new one:
-          pq.add(newTuple);
-          previous[neighbor.getId()] = current.vertex;
-          // String sdebug = String.format("[current vertex:%d, weight:%d, neighbor: %d, nghb weight: %d, nghb_heuristic: %d]  ", current.vertex.getId(), current.vertex.getCost(), neighbor.getId(), neighbor.getCost(), heuristic(end, neighbor));
-          // System.out.print(sdebug);
-          // System.out.println("PQ: "+Arrays.toString(pq.toArray()));
+          previous[neighbor.getId()] = current.getVertex();
+          // Cost for Astar is based on totalcost + heuristics:
+          Dijkstra.decreaseKey(pq, neighbor, totalCost + heuristic(end, neighbor));
         }
       } 
     }
+
+    Dijkstra.setShortPath(previous, start, end);
+    return distances;
   }
 
   public static void main(String[] args) {
-    // TODO: organize testing and run method
     Graph graph = new Graph(5, 5);
     Vertex start = graph.getVertex(0, 0);
     start.setType(Type.START);
@@ -107,26 +79,7 @@ public class Astar {
 
     System.out.println(graph);
     Astar.run(graph, start, end);
-   
-    ////////// Hey Paris. Maybe you can look Dijkstra.java
-
-    //////////////// This is the setShortPath defined in Dijkstra.java
-    ArrayList<Vertex> path = new ArrayList<>();
-    Vertex next = end;
-    while (next.getId() != start.getId()) {
-      path.add(next);
-      next = previous[next.getId()];
-    }
-
-    path.add(start);
-    Collections.reverse(path);
-    System.out.println("PATH: "+path+"\n\n");
-
-    for (Vertex vertex : path) {
-      if(vertex.getType() != Type.END && vertex.getType() != Type.START) {
-        vertex.setType(Type.SHTPATH);
-      }
-    }
     System.out.println(graph);
+
   }
 }

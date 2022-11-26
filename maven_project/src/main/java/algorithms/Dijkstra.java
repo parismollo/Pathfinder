@@ -25,7 +25,7 @@ public class Dijkstra {
         }
     }
 
-    private static PriorityQueue<Tuple> makeQueue(Graph graph) {
+    static PriorityQueue<Tuple> makeQueue(Graph graph) {
         PriorityQueue<Tuple> q = new PriorityQueue<Tuple>(new TupleComparator());
         for(Vertex[] ve : graph.getVertices())
             for(Vertex v : ve)
@@ -33,7 +33,7 @@ public class Dijkstra {
         return q;
     }
 
-    private static void decreaseKey(PriorityQueue<Tuple> queue, Vertex v, int distance) {
+    static void decreaseKey(PriorityQueue<Tuple> queue, Vertex v, int distance) {
         Tuple editTuple = null;
         for(Tuple t : queue) {
             if(t.getVertex() == v) { // Attention ici. Peut etre faut il utiliser equals ?
@@ -49,7 +49,7 @@ public class Dijkstra {
         queue.add(editTuple);
     }
 
-    private static void setShortPath(Vertex[] previous, Vertex start, Vertex end) {
+    static void setShortPath(Vertex[] previous, Vertex start, Vertex end) {
         Vertex next = end;
         
         while (next.getId() != start.getId()) {
