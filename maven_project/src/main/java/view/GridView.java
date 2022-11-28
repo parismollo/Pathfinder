@@ -88,4 +88,12 @@ public class GridView extends JPanel {
         this.itemToDrag = item;
     }
 
+    public Vertex getStart() {
+        return graph.getStart();
+    }
+
+    public Vertex getEnd() {
+        return graph.getEnd();
+    }
+
 }

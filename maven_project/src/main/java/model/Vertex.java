@@ -107,6 +107,7 @@ public class Vertex {
         break;
       case SHTPATH:
         this.setColor(Color.ORANGE);
+        break;
       default:
         this.setColor(Color.WHITE);
         break;

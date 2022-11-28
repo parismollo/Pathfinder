@@ -3,16 +3,20 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import algorithms.Dijkstra;
 import model.Graph;
 
 public class Window extends JFrame
 {
-	private static final long serialVersionUID = 1L;
+	private GridView gridView;
 
 	public Window(int w, int h)
 	{
@@ -25,17 +29,51 @@ public class Window extends JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		
 
 		setGridView(new Graph(20, 20));
 
+		setKeyListener();
+
 		this.setVisible(true);
+	}
+
+	public void setKeyListener() {
+		this.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				super.keyPressed(e);
+				if(gridView == null)
+					return;
+				Graph graph = gridView.getGraph();
+				switch(e.getKeyCode()) {
+					case KeyEvent.VK_A:
+						// A*
+						break;
+					case KeyEvent.VK_D:
+						// Dijkstra
+						Dijkstra.run(graph);
+						break;
+					case KeyEvent.VK_G:
+						// Greedy
+						break;
+					case KeyEvent.VK_C:
+					case KeyEvent.VK_R:
+					case KeyEvent.VK_DELETE:
+						graph.resetShortPath();
+						gridView.repaint();
+						break;
+				}
+				gridView.revalidate();
+				gridView.repaint();
+			}
+		});
+		this.requestFocus();
 	}
 
 	public void setGridView(Graph graph) {
 		this.getContentPane().removeAll();
 		this.setResizable(true);
-		this.getContentPane().add(new GridView(graph));
+		this.gridView = new GridView(graph);
+		this.getContentPane().add(gridView);
 		revalidate();
 		repaint();
 	}

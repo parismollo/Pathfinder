@@ -12,11 +12,6 @@ public class Dijkstra {
     private static int distances[];
     private static Vertex previous[];
 
-    public static void run(Graph graph) {
-        // getStart(), getEnd();
-        run(graph, null, null);
-    }
-
     private static class TupleComparator implements Comparator<Tuple> {
         @Override
         public int compare(Tuple t1, Tuple t2) {
@@ -57,6 +52,10 @@ public class Dijkstra {
                 next.setType(Type.SHTPATH);
           next = previous[next.getId()];
         }
+    }
+
+    public static int[] run(Graph graph) {
+        return run(graph, graph.getStart(), graph.getEnd());
     }
 
     // Return Graph ? On clone le graphe puis on le modifie

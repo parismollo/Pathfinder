@@ -61,6 +61,29 @@ public class Graph {
     return null;
   }
 
+  public Vertex getStart() {
+    for(Vertex[] ve : vertices)
+      for(Vertex v : ve)
+        if(v.isStart())
+          return v;
+    return null;
+  }
+
+  public Vertex getEnd() {
+    for(Vertex[] ve : vertices)
+      for(Vertex v : ve)
+        if(v.isEnd())
+          return v;
+    return null;
+  }
+
+  public void resetShortPath() {
+    for(Vertex[] ve : vertices)
+      for(Vertex v : ve)
+        if(v.isShorterPath())
+          v.setType(Type.PATH);
+  }
+
   public int getNbRows() {
     return this.rows;
   }
