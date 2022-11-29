@@ -44,6 +44,9 @@ public class Window extends JFrame
 				if(gridView == null)
 					return;
 				Graph graph = gridView.getGraph();
+				if(graph.getStart() == null || graph.getEnd() == null)
+					return;
+				graph.resetShortPath();
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_A:
 						Astar.run(graph);
@@ -67,6 +70,7 @@ public class Window extends JFrame
 				}
 				gridView.revalidate();
 				gridView.repaint();
+				System.out.println("Taille du chemin: "+graph.getShorterPathSize());
 			}
 		});
 		this.requestFocus();

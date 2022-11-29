@@ -15,7 +15,7 @@ public class Astar {
 
   public static void run(Graph graph) {
     // getStart(), getEnd()
-    run(graph, null, null);
+    run(graph, graph.getStart(), graph.getEnd());
   }
 
   private static int heuristic(Vertex end, Vertex current) {

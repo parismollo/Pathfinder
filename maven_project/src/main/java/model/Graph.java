@@ -77,6 +77,15 @@ public class Graph {
     return null;
   }
 
+  public int getShorterPathSize() {
+    int count = 0;
+    for(Vertex[] ve : vertices)
+      for(Vertex v : ve)
+        if(v.isShorterPath())
+          count++;
+    return count;
+  }
+
   public void resetShortPath() {
     for(Vertex[] ve : vertices)
       for(Vertex v : ve)

@@ -1,13 +1,10 @@
 package algorithms;
 
-import java.util.PriorityQueue;
 import java.util.Stack;
 
 import model.Graph;
 import model.Vertex;
 import model.Vertex.Type;
-
-import java.lang.Math;
 
 public class Greedy {
     private static int distances[];
@@ -34,9 +31,7 @@ public class Greedy {
 
     private static void setShortestPath(Vertex[] previous, Vertex start, Vertex end) {
         Vertex next = previous[end.getId()];
-        System.out.println("/n/n");
         while(!next.isStart()){//S'arrête si erreur ou si on arrive à start car previous[start.getId()] vaut null
-            System.out.println(next.getId());
             next.setType(Type.SHTPATH);
             next = previous[next.getId()];
         }
@@ -48,23 +43,21 @@ public class Greedy {
 
         //On mets dans le tableau distance la distance entre chaque sommet qui n'est pas un mur et le point d'arrivée
         //Si c'est un mur on considère la distance comme infinie
-        for(Vertex[] ve : graph.getVertices()){
-            for(Vertex v : ve){
-                if(!v.isWall()){
+        for(Vertex[] ve : graph.getVertices()) {
+            for(Vertex v : ve) {
+                if(!v.isWall())
                     distances[v.getId()] = distAtoB(v, end);
-                } else {
+                else
                     distances[v.getId()] = Integer.MAX_VALUE;
-                }
                 previous[v.getId()] = null;
             }
         }
-        //previous[start.getId()] = start;
 
         Stack<Vertex> queue = new Stack<>();
         queue.add(start);
         //Vertex prev = start;
 
-        while(!queue.isEmpty()){
+        while(!queue.isEmpty()) {
             Vertex current = queue.pop();
             if(current.isEnd())
                 break;
@@ -73,10 +66,9 @@ public class Greedy {
             
             //Il y aura cas à gérer comme le cas ou pas ne voisins qui ne sont pas des murs -> renvoie impossible
 
-            for(Vertex neighbor : current.getNeighbors(false)){//Tous les voisins de current qui ne sont pas des murs 
-                if(previous[neighbor.getId()] == null){//sont pris en compte et ajoutés dans queue avec current pour precedent
+            for(Vertex neighbor : current.getNeighbors(false)) {//Tous les voisins de current qui ne sont pas des murs 
+                if(previous[neighbor.getId()] == null) {//sont pris en compte et ajoutés dans queue avec current pour precedent
                     queue.add(neighbor);
-                    System.out.println(neighbor.getId());
                     previous[neighbor.getId()] = current;
                 }
             }

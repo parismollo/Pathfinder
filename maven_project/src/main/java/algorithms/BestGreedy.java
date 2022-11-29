@@ -37,9 +37,7 @@ public class BestGreedy {
 
     private static void setShortestPath(Vertex[] previous, Vertex start, Vertex end) {
         Vertex next = previous[end.getId()];
-        System.out.println("/n/n");
-        while(!next.isStart()){//S'arrête si erreur ou si on arrive à start car previous[start.getId()] vaut null
-            System.out.println(next.getId());
+        while(!next.isStart()) { // S'arrête si erreur ou si on arrive à start car previous[start.getId()] vaut null
             next.setType(Type.SHTPATH);
             next = previous[next.getId()];
         }
@@ -51,23 +49,21 @@ public class BestGreedy {
 
         //On mets dans le tableau distance la distance entre chaque sommet qui n'est pas un mur et le point d'arrivée
         //Si c'est un mur on considère la distance comme infinie
-        for(Vertex[] ve : graph.getVertices()){
-            for(Vertex v : ve){
-                if(!v.isWall()){
+        for(Vertex[] ve : graph.getVertices()) {
+            for(Vertex v : ve) {
+                if(!v.isWall())
                     distances[v.getId()] = distAtoB(v, end);
-                } else {
+                else
                     distances[v.getId()] = Integer.MAX_VALUE;
-                }
                 previous[v.getId()] = null;
             }
         }
-        //previous[start.getId()] = start;
 
         PriorityQueue<Tuple> queue = new PriorityQueue<Tuple>(new TupleComparator()); 
         queue.add(new Tuple(start, Integer.MAX_VALUE));       
         //Vertex prev = start;
 
-        while(!queue.isEmpty()){
+        while(!queue.isEmpty()) {
             Vertex current = queue.poll().getVertex();
             if(current.isEnd())
                 break;
@@ -76,14 +72,14 @@ public class BestGreedy {
             
             //Il y aura cas à gérer comme le cas ou pas ne voisins qui ne sont pas des murs -> renvoie impossible
 
-            for(Vertex neighbor : current.getNeighbors(false)){//Tous les voisins de current qui ne sont pas des murs 
-                if(previous[neighbor.getId()] == null){//sont pris en compte et ajoutés dans queue avec current pour precedent
+            for(Vertex neighbor : current.getNeighbors(false)) {//Tous les voisins de current qui ne sont pas des murs 
+                if(previous[neighbor.getId()] == null) {//sont pris en compte et ajoutés dans queue avec current pour precedent
                     queue.add(new Tuple(neighbor, distAtoB(neighbor, end)));
-                    System.out.println(neighbor.getId());
                     previous[neighbor.getId()] = current;
                 }
             }
         }
+        
         setShortestPath(previous, start, end);
      }
 
