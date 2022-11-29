@@ -27,7 +27,8 @@ public class VertexView extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawString(vertex.getId()+"", 0, 0);
+        if(getBackground() != vertex.getColor())
+            setBackground(vertex.getColor());
     }
 
     private void setMouseListener() {
@@ -40,7 +41,7 @@ public class VertexView extends JPanel {
                     if(vertex.getType() == Type.WALL || vertex.getType() == Type.PATH)
                         gridView.setItemToDrag(vertex.getType() == Type.WALL ? Type.PATH : Type.WALL); // WALL OU PATH
                 refreshType();
-                setBackground(vertex.getColor());
+                repaint();
             }
 
             @Override
@@ -55,7 +56,7 @@ public class VertexView extends JPanel {
                 Type dragItem = gridView.getItemToDrag();
                 if(dragItem != Type.END && !isStartOrEnd(vertex.getType())) {
                     vertex.setType(dragItem);
-                    setBackground(vertex.getColor());
+                    repaint();
                 }
             }
 
