@@ -10,7 +10,7 @@ import model.Vertex.Type;
 
 import java.lang.Math;
 
-public class Greedy2 {
+public class BestGreedy {
     private static int distances[];
     private static Vertex previous[];
     //http://ijadis.org/index.php/IJADIS/article/view/greedy-a-star-and-dijkstras-algorithms-in-finding-shortest-path
@@ -87,6 +87,9 @@ public class Greedy2 {
         setShortestPath(previous, start, end);
      }
 
+    public static void run(Graph graph) {
+        run(graph, graph.getStart(), graph.getEnd());
+    }
 
 
      public static void main(String[] args) {

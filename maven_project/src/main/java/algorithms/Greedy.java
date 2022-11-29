@@ -12,6 +12,11 @@ import java.lang.Math;
 public class Greedy {
     private static int distances[];
     private static Vertex previous[];
+
+    //Verif si c'est vraiment Greedy
+    //Ajouter commentaires
+    //Trouver bon noms de fichers
+
     //http://ijadis.org/index.php/IJADIS/article/view/greedy-a-star-and-dijkstras-algorithms-in-finding-shortest-path
     //"Greedy est rapide mais ne trouve pas toujours la solution optimale"
 
@@ -37,7 +42,7 @@ public class Greedy {
         }
     }
 
-     public static void run(Graph graph, Vertex start, Vertex end) {
+    public static void run(Graph graph, Vertex start, Vertex end) {
         distances = new int[graph.getNbCols() * graph.getNbRows()];
         previous = new Vertex[graph.getNbCols() * graph.getNbRows()];
 
@@ -77,8 +82,11 @@ public class Greedy {
             }
         }
         setShortestPath(previous, start, end);
-     }
+    }
 
+    public static void run(Graph graph) {
+        run(graph, graph.getStart(), graph.getEnd());
+    }
 
 
      public static void main(String[] args) {

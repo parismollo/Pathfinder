@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import algorithms.Dijkstra;
+import algorithms.*;
 import model.Graph;
 
 public class Window extends JFrame
@@ -46,14 +46,17 @@ public class Window extends JFrame
 				Graph graph = gridView.getGraph();
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_A:
-						// A*
+						Astar.run(graph);
 						break;
 					case KeyEvent.VK_D:
 						// Dijkstra
 						Dijkstra.run(graph);
 						break;
 					case KeyEvent.VK_G:
-						// Greedy
+						Greedy.run(graph);
+						break;
+					case KeyEvent.VK_B:
+						BestGreedy.run(graph);
 						break;
 					case KeyEvent.VK_C:
 					case KeyEvent.VK_R:
