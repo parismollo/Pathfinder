@@ -2,7 +2,7 @@
 identifiant : G2S1
 Paris Felipe Mollo Christondis
 Leopold Abignoli
-Daniel <!-- Le giga crack mec tu coco --> Gilardoni
+Daniel Gilardoni
 
 # Projet MD5
 Projet Chemin, sujet 1
@@ -11,31 +11,30 @@ Intro qui explique les bails genre une grille dans nôtre projet c'est rpz par u
 
 1. **Longueur et nombre de chemins de longueurs minimales dans une grille** 
 
-Qu'est-ce que la taille d'un chemin dans notre projet ? C'est le nombre de deplacement effectué d'un sommet à un autre, d'une case à une autre (côte à côte) pour aller d'un point à un autre
+La taille d'un chemin dans notre projet est le nombre de deplacement effectué d'un sommet à un de ses voisins, ou le nombre de cases par lequel on doit passer pour aller d'une case à une autre de la grille.
+Un sommet qui a pour coordonnée (x,y) correspond à la case de hauteur y et de longueur x.
 
 A) Longueur du chemin minimal
 
-Qu'est ce que x et y dans un graph ?
-Est-ce qu'on a x et y dans les graphes de notre projet ?
-
 Un chemin minimal dans une grille de longueur l et de hauteur h, sans murs, est de longueur :
 |x1 - x2| + |y1 - y2| , avec (x1,y1) les coordonnées du point de départ et (x2,y2) celles du point d'arrivée.
+(La case en bas à gauche est en (0,0) et celle en haut à droite est en (l,h))
 <!-- |x1 - x2| est la valeur absolue de x1 - x2 -->
 On se deplace de |x1 - x2| cases en lignes puis de |y1 - y2| en colonne, depuis le point de depart pour atteindre le point d'arrivée.
 
 B) Nombres de chemins de longueur minimale
 
-0 si pt arrivée = pt depart (x1 = x2 et y1 = y2)    // si longueur 0
-1 si ils sont sur même ligne ou même colone (x1 = x2 ou y1 = y2) // et longueur |x1 - x2| ou |y1 - y2|
-Si x1 != x2 et y1 != y2 alors :
-2 si |x1 - x2| + |y1 - y2| = 2 (en sachant que x1 != x2 et y1 != y2 comme dit au-dessus donc pas 2 d'ecart entre x1 et x2 par ex) // si longueur 2
-si lg = 3 : nb = 3
-si lg = 4 : nb = 4 ou 6
-si lg = 5 : nb = 5 ou 10
-si lg = 6 : nb = 6 ou 15 ou 20
-
+Si le point d'arrivée et de depart sont sur la même ligne (y1 = y2) ou la même colonne (x1 = x2) alors il n'y a qu'un chemin de longueur minimale.
+Si ce n'est pas le cas (x1 != x2 et y1 != y2) alors :
+<!-- 2 si |x1 - x2| + |y1 - y2| = 2 (en sachant que x1 != x2 et y1 != y2 comme dit au-dessus donc pas 2 d'ecart entre x1 et x2 par ex) // si longueur 2 -->
+<!-- si lg = 3 : nb = 3 -->
+<!-- si lg = 4 : nb = 4 ou 6 -->
+<!-- si lg = 5 : nb = 5 ou 10 -->
+<!-- si lg = 6 : nb = 6 ou 15 ou 20 -->
 On fait |x1 - x2| deplacements en abcisse et |y1 - y2| en ordonnées.
-Le nombre de chemins de taille minimale possible est :
+Choisir un chemin de taille minimale c'est choisir |x1 - x2| déplacements en abcisse et |y1 - y2| deplacements en ordonnée dans l'ordre que l'on veut.
+Cela revient à compter le nombre de mots de taille |x1 - x2| + |y1 - y2| composés de |x1 - x2| lettre x et de |y1 - y2| lettre y différents. Ce qui se calcule à l'aide du coeficient binomial.
+Le nombre de chemins de taille minimale possible est donc :
 (|x1 - x2| + |y1 - y2|)! / ((|x1 - x2|)! * (|y1 - y2|)!)
 ou
 (|x1 - x2| + |y1 - y2|    |y1 - y2|) coef binomial 
@@ -54,3 +53,10 @@ En effet le nombre de chemins entre ces 2 points, d'après les conclusions de la
 ce qui est supérieur à un chemin qui aurait moins de deplacements en abcisses ou en ordonnées (demontrer ?) et il ne peut pas y avoir plus de deplacements en abcisse que l, et que h en ordonnée.
 
 Grand O ?
+
+3. **L'algorithme de parcours en largeur**
+
+
+4. **Programme calculant un des plus court chemin dans une grille** 
+
+5. **Complexité de l'algorithme calculant le plus court chemin**
