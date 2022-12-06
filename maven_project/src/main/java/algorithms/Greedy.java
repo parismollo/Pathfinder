@@ -1,29 +1,26 @@
 package algorithms;
 
-import java.util.Stack;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 import model.Graph;
 import model.Vertex;
 import model.Vertex.Type;
 
+
+import java.lang.Math;
+
 public class Greedy {
     private static int distances[];
     private static Vertex previous[];
 
-    //Verif si c'est vraiment Greedy
-    //Ajouter commentaires
-    //Trouver bon noms de fichers
-
-    //http://ijadis.org/index.php/IJADIS/article/view/greedy-a-star-and-dijkstras-algorithms-in-finding-shortest-path
-    //"Greedy est rapide mais ne trouve pas toujours la solution optimale"
-
-    //Math.abs(x1 - x2) + Math.abs(y1 - y2) pour avoir distance "heuristic"/"à vole d'oiseau" entre (x1,y1), ici 
-    //là où on en est dans algo, donc le sommet courant, et l'arrivée. Et Greedy va trier prochains sommets à 
-    //explorer en commançant par ceux ayant la distance heuristic à l'arrivée minimale.
-
-    //https://www.redblobgames.com/pathfinding/a-star/introduction.html
-
-    //Commenter en écrivant fct
+    private static class TupleComparator implements Comparator<Tuple> {
+        @Override
+        public int compare(Tuple t1, Tuple t2) {
+            // Renvoie -1 si distance de t1 < distance de t2 sinon 1
+            return t1.getDistance() < t2.getDistance()  ? -1 : 1;
+        }
+    }
 
     private static int distAtoB(Vertex a, Vertex b){
         return Math.abs(a.getX()-b.getX()) + Math.abs(a.getY() - b.getY());
@@ -31,13 +28,13 @@ public class Greedy {
 
     private static void setShortestPath(Vertex[] previous, Vertex start, Vertex end) {
         Vertex next = previous[end.getId()];
-        while(!next.isStart()){//S'arrête si erreur ou si on arrive à start car previous[start.getId()] vaut null
+        while(!next.isStart()) { // S'arrête si erreur ou si on arrive à start car previous[start.getId()] vaut null
             next.setType(Type.SHTPATH);
             next = previous[next.getId()];
         }
     }
 
-    public static void run(Graph graph, Vertex start, Vertex end) {
+     public static void run(Graph graph, Vertex start, Vertex end) {
         distances = new int[graph.getNbCols() * graph.getNbRows()];
         previous = new Vertex[graph.getNbCols() * graph.getNbRows()];
 
@@ -53,28 +50,24 @@ public class Greedy {
             }
         }
 
-        Stack<Vertex> queue = new Stack<>();
-        queue.add(start);
-        //Vertex prev = start;
+        PriorityQueue<Tuple> queue = new PriorityQueue<Tuple>(new TupleComparator()); 
+        queue.add(new Tuple(start, Integer.MAX_VALUE));       
 
         while(!queue.isEmpty()) {
-            Vertex current = queue.pop();
+            Vertex current = queue.poll().getVertex();
             if(current.isEnd())
                 break;
-            //previous[current.getId()] = prev;
-            //prev = current;
             
-            //Il y aura cas à gérer comme le cas ou pas ne voisins qui ne sont pas des murs -> renvoie impossible
-
             for(Vertex neighbor : current.getNeighbors(false)) {//Tous les voisins de current qui ne sont pas des murs 
                 if(previous[neighbor.getId()] == null) {//sont pris en compte et ajoutés dans queue avec current pour precedent
-                    queue.add(neighbor);
+                    queue.add(new Tuple(neighbor, distAtoB(neighbor, end)));
                     previous[neighbor.getId()] = current;
                 }
             }
         }
+        
         setShortestPath(previous, start, end);
-    }
+     }
 
     public static void run(Graph graph) {
         run(graph, graph.getStart(), graph.getEnd());
@@ -100,3 +93,4 @@ public class Greedy {
         System.out.println(graph);
     }
 }
+

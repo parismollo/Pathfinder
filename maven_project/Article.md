@@ -45,18 +45,16 @@ Si t'as longueur 6 et 3 deplacements en abcisse à faire alors ça revient à fa
 
 2. **Borne maximale du nombre de chemins dans une grille**
 
-Dans une grille sans mur de longueur l et hauteur h, la taille maximale d'un chemin est l+h. 
+Dans une grille sans mur de longueur l et hauteur h, et lorsque l'on se deplace uniquement en se rapprochant du point d'arrivée, c'est à dire en diminuant |x1 - x2| ou |y1 - y2| de 1 à chaque deplacement, la taille maximale d'un chemin est l+h
 C'est le chemin minimal entre le point de depart de coordonnée (0,0), et le point d'arrivée de coordonnée (h,l) par exemple.
-Le nombre de chemins de taille minimale entre ces 2 points est la borne maximale du nombre de chemin dans une grille.
+Le nombre de chemins de taille minimale entre ces 2 points est donc la borne maximale du nombre de chemin dans une grille.
 En effet le nombre de chemins entre ces 2 points, d'après les conclusions de la partie précédente, est :
 (l+h)! / (h! + l!)
-ce qui est supérieur à un chemin qui aurait moins de deplacements en abcisses ou en ordonnées (demontrer ?) et il ne peut pas y avoir plus de deplacements en abcisse que l, et que h en ordonnée.
-
-Grand O ?
+ce qui est supérieur à un chemin qui aurait moins de deplacements en abcisses ou en ordonnées et il ne peut pas y avoir plus de deplacements en abcisse que l, et que h en ordonnée.
 
 3. **L'algorithme de parcours en largeur**
 ### Type
-* (BFS) est un algorithme de recherche qui permet parcourir un arbre ou un graphe.
+* (BFS) est un algorithme de recherche qui permet de parcourir un arbre ou un graphe.
 ### Input
 * Entrées : graphe G = (V, E) et sommet s ∈ V, où V represente les sommets du graphe G et E represente les aretes (u, v) de G.
 ### Complexité
@@ -117,3 +115,7 @@ retourner precedents
 Le chemin le plus court entre le sommet s et un sommet arrivée est 
 
 1. **Complexité de l'algorithme calculant le plus court chemin**
+
+
+La même que Dijkstra ? Dans le pire cas.
+C'est quoi dans une grille ?

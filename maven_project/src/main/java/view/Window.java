@@ -58,9 +58,6 @@ public class Window extends JFrame
 					case KeyEvent.VK_G:
 						Greedy.run(graph);
 						break;
-					case KeyEvent.VK_B:
-						BestGreedy.run(graph);
-						break;
 					case KeyEvent.VK_C:
 					case KeyEvent.VK_R:
 					case KeyEvent.VK_DELETE:
