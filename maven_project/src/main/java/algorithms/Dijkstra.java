@@ -12,16 +12,8 @@ public class Dijkstra {
     private static int distances[];
     private static Vertex previous[];
 
-    private static class TupleComparator implements Comparator<Tuple> {
-        @Override
-        public int compare(Tuple t1, Tuple t2) {
-            // Renvoie -1 si distance de t1 < distance de t2 sinon 1
-            return t1.getDistance() < t2.getDistance()  ? -1 : 1;
-        }
-    }
-
     static PriorityQueue<Tuple> makeQueue(Graph graph) {
-        PriorityQueue<Tuple> q = new PriorityQueue<Tuple>(new TupleComparator());
+        PriorityQueue<Tuple> q = new PriorityQueue<Tuple>(new Tuple.TupleComparator());
         for(Vertex[] ve : graph.getVertices())
             for(Vertex v : ve)
                 q.add(new Tuple(v, v.isStart() ? 0 : Integer.MAX_VALUE));

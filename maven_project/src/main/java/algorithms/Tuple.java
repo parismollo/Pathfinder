@@ -1,5 +1,7 @@
 package algorithms;
 
+import java.util.Comparator;
+
 import model.Vertex;
 
 public class Tuple {
@@ -29,6 +31,15 @@ public class Tuple {
 
     public void setDistance(int distance) {
         this.distance = distance;
+    }
+
+
+    public static class TupleComparator implements Comparator<Tuple> {
+        @Override
+        public int compare(Tuple t1, Tuple t2) {
+            // Renvoie -1 si distance de t1 < distance de t2 sinon 1
+            return t1.getDistance() < t2.getDistance()  ? -1 : 1;
+        }
     }
 
 }

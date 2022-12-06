@@ -14,7 +14,6 @@ public class Astar {
   public static Vertex previous[];
 
   public static void run(Graph graph) {
-    // getStart(), getEnd()
     run(graph, graph.getStart(), graph.getEnd());
   }
 
@@ -37,7 +36,9 @@ public class Astar {
     previous[start.getId()] = start;
 
     // Create PQ:
-    PriorityQueue<Tuple> pq = Dijkstra.makeQueue(graph);
+    PriorityQueue<Tuple> pq = new PriorityQueue<>(new Tuple.TupleComparator());
+    pq.add(new Tuple(start, distances[start.getId()]));
+
     // Loop while not empty:
     while (!pq.isEmpty()) {
       // Get min value in PQ:
@@ -55,7 +56,8 @@ public class Astar {
           distances[neighbor.getId()] = totalCost;
           previous[neighbor.getId()] = current.getVertex();
           // Cost for Astar is based on totalcost + heuristics:
-          Dijkstra.decreaseKey(pq, neighbor, totalCost + heuristic(end, neighbor));
+          Tuple newTuple = new Tuple(neighbor, totalCost + heuristic(end, neighbor));
+          pq.add(newTuple);
         }
       } 
     }
