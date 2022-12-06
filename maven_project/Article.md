@@ -55,8 +55,65 @@ ce qui est supérieur à un chemin qui aurait moins de deplacements en abcisses 
 Grand O ?
 
 3. **L'algorithme de parcours en largeur**
+### Type
+* (BFS) est un algorithme de recherche qui permet parcourir un arbre ou un graphe.
+### Input
+* Entrées : graphe G = (V, E) et sommet s ∈ V, où V represente les sommets du graphe G et E represente les aretes (u, v) de G.
+### Complexité
+* O(V + E) pour les listes d'adjacence
+* O(V^2) when matrice d''adjacence 
 
+### Pseudo code
+```
+début
+    créer ﬁle(Q);
+    marquer(départ);
+    enﬁler(Q, départ);
+    tant que Q != ∅ faire
+        u ← déﬁler(Q);
+        pour tous les uv ∈ E faire
+            si v non marqué alors
+                marquer(v);
+                enﬁler(Q, v);
+```
+
+### Description
+
+L'algorithme BFS (Breadth-first search) est un algorithme de recherche. Il réalise sa recherche à travers un parcours transversal d'un graphe, ce qui signifie qu'on visite tous les sommets d'un même niveau avant de passer à un autre. 
+
+Afin de visiter tous les sommets d'une graphe. BFS catégorise chaque sommet en deux types - visité et non visité. À partir d'un noeud choisi, BFS visite tous les noeuds adjacents au noeud sélectionné et ainsi de suite. 
+
+### Déroulement de l'algorithme
+___
+
+#### Étape 1:
+- Déclarer une **file d'attente** (*FIFO*) et insérer le sommet de départ.
+- Initialiser un **tableau de marquage** (*tableau de booléan*) et marquer le sommet de départ comme visité.
+
+#### Étape 2
+Suivre le processus ci-dessous jusqu'à ce que la file d'attente soit vide :
+- Supprimer le premier sommet de la file d'attente.
+- Marquer ce sommet comme visité.
+- Insérer tous les voisins non visités du sommet dans la file d'attente.
 
 4. **Programme calculant un des plus court chemin dans une grille** 
 
-5. **Complexité de l'algorithme calculant le plus court chemin**
+*Entrées* : Graphe orienté G = (S, A) et un sommet s ∈ S
+*Sorties* : Distance de s aux autres sommets
+```
+Q ← ∅
+distance[s] ← 0
+precedent[s] ← s
+Pour tous les u ∈ A \ {s} faire
+    distances[u] ← +∞
+Tant que Q != S faire
+    Trouver u ∈ S \ Q tel que distances[u] est minimum
+    Q ← Q ∪ {u}
+    Pour tous les v ∈ S \ Q tels que (u, v) ∈ A faire
+        precedent[v] ← 
+        distances[v] ← min(distances[v], distances[u] + 1)
+retourner precedents
+```
+Le chemin le plus court entre le sommet s et un sommet arrivée est 
+
+1. **Complexité de l'algorithme calculant le plus court chemin**
