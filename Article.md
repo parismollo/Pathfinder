@@ -105,9 +105,9 @@ début
     créer ﬁle(Q);
     marquer(départ);
     enﬁler(Q, départ);
-    tant que Q != ∅ faire
+    Tant que Q != ∅ faire
         u ← déﬁler(Q);
-        pour tous les uv ∈ E faire
+        Pour tous les u,v ∈ E faire
             si v non marqué alors
                 marquer(v);
                 enﬁler(Q, v);
@@ -134,25 +134,41 @@ Suivre le processus ci-dessous jusqu'à ce que la file d'attente soit vide :
 
 ### 4. Programme calculant un des plus court chemin dans une grille
 
-*Entrées* : Graphe orienté $G = (S, A)$ et un sommet $s ∈ S$
-*Sorties* : Distance de $s$ aux autres sommets
+*Entrées* : Graphe orienté G = (S, A) et un sommet s ∈ S, la source, et un sommet t ∈ S, l'arrivée.
+*Sorties* : Distance de s aux autres sommets
 ```
-Q ← ∅
-distance[s] ← 0
-precedent[s] ← s
-Pour tous les u ∈ A \ {s} faire
-    distances[u] ← +∞
-Tant que Q != S faire
-    Trouver u ∈ S \ Q tel que distances[u] est minimum
-    Q ← Q ∪ {u}
-    Pour tous les v ∈ S \ Q tels que (u, v) ∈ A faire
-        precedent[v] ← 
-        distances[v] ← min(distances[v], distances[u] + 1)
-retourner precedents
+
+créer filePriorité(pq);
+enfiler(pq, (s, 0));
+
+Pour tous i de 0 à taille(distances) faire
+    distances(i) ←  +∞;
+    previous(i)  ←  null;
+
+previous(s) ← None;
+distances(s) ← 0;
+
+Tant que pq != ∅ faire
+   u ← defiler(pq);
+
+   Si u = t:
+      Fin;
+      
+   Pour tous les (u, v) ∈ E faire:
+      dist ← distances(u) + 1
+      Si dist < distances(v) alors
+         distances(v) ← dist
+         priorite ← dist + heuristic(t, v)
+         enfiler(pq, (v, priorite))
+         prev(v) ← u
 ```
-Le chemin le plus court entre le sommet $s$ et un sommet arrivée est . . .
+Le chemin le plus court entre le sommet s et un sommet arrivée est donné par  
 
 ### 5. Complexité de l'algorithme calculant le plus court chemin
+Soit un graphe G = (V,E). Dans le pire des cas, l'algorithme va visiter tous les sommets, soit O(V). A chaque tour de boucle, on récupére le sommet avec la priorité la plus faible, ce qui ici se fait en O(log(V)) avec une file de priorité. On compare la distance du sommet courant avec la distance de chacun de ses voisins dans le tableau distances. Chaque comparaison se fait en temps constant. Si la distance du voisin est la plus grande alors on va mettre à jour avec la distance du sommet courant plus un, et ajouter ce sommet à la file de priorité. Il n'y a pas de poids et avec la file de priorité on regarde les sommets dans l'ordre de leur distance à la source, donc on ne va jamais modifié la distance à la source d'un sommet dont la distance n'est pas +infinie et donc on ne va jamais ajouté 2 fois un sommet à la file de priorité. Dans le pire cas on a donc O(V) tours de boucles, donc O(V) ajout/suppression dans la file qui se font en O(log(V)), et 2*E soit O(E) operations constantes (comparaison avec voisins) car on regarde chaque voisins pour chaque sommets ce qui est egale au nombre d'arêtes *2.
 
-La même que Dijkstra ? Dans le pire cas.
-C'est quoi dans une grille ?
+val retour Q4 comme dans grille avec poids 1 y a pas O(E) mais O(V) vu qu'on va pas repasser par sommets deja mis dans file. Donc V * logV + E On se sert de grille pour calc naif, heuristic...
+
+On visite chaque noeud une fois O(|V|) et ensuite "relax" chaque voisin O(|E|), à chaque fois il doit acceder à file de priorité O(log V)
+
+Donc la complexité est de O(V + E * log(V))
