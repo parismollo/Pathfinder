@@ -67,9 +67,9 @@ début
     créer ﬁle(Q);
     marquer(départ);
     enﬁler(Q, départ);
-    tant que Q != ∅ faire
+    Tant que Q != ∅ faire
         u ← déﬁler(Q);
-        pour tous les uv ∈ E faire
+        Pour tous les u,v ∈ E faire
             si v non marqué alors
                 marquer(v);
                 enﬁler(Q, v);
@@ -96,26 +96,40 @@ Suivre le processus ci-dessous jusqu'à ce que la file d'attente soit vide :
 
 4. **Programme calculant un des plus court chemin dans une grille** 
 
-*Entrées* : Graphe orienté G = (S, A) et un sommet s ∈ S
+*Entrées* : Graphe orienté G = (S, A) et un sommet s ∈ S, la source, et un sommet t ∈ S, l'arrivée.
 *Sorties* : Distance de s aux autres sommets
 ```
-Q ← ∅
-distance[s] ← 0
-precedent[s] ← s
-Pour tous les u ∈ A \ {s} faire
-    distances[u] ← +∞
-Tant que Q != S faire
-    Trouver u ∈ S \ Q tel que distances[u] est minimum
-    Q ← Q ∪ {u}
-    Pour tous les v ∈ S \ Q tels que (u, v) ∈ A faire
-        precedent[v] ← 
-        distances[v] ← min(distances[v], distances[u] + 1)
-retourner precedents
+
+créer filePriorité(pq);
+enfiler(pq, (s, 0));
+
+Pour tous i de 0 à taille(distances) faire
+    distances(i) ←  +∞;
+    previous(i)  ←  null;
+
+previous(s) ← None;
+distances(s) ← 0;
+
+Tant que pq != ∅ faire
+   u ← defiler(pq);
+
+   Si u = t:
+      Fin;
+      
+   Pour tous les (u, v) ∈ E faire:
+      dist ← distances(u) + 1
+      Si dist < distances(v) alors
+         distances(v) ← dist
+         priorite ← dist + heuristic(t, v)
+         enfiler(pq, (v, priorite))
+         prev(v) ← u
 ```
-Le chemin le plus court entre le sommet s et un sommet arrivée est 
+Le chemin le plus   court entre le sommet s et un sommet arrivée est 
 
-1. **Complexité de l'algorithme calculant le plus court chemin**
+5. **Complexité de l'algorithme calculant le plus court chemin**
 
+Dans le pire des cas, l'algorithme va visiter tous les sommets, 
 
-La même que Dijkstra ? Dans le pire cas.
-C'est quoi dans une grille ?
+On visite chaque noeud une fois O(|V|) et ensuite "relax" chaque voisin O(|E|), à chaque fois il doit acceder à file de priorité O(log V)
+
+Donc la complexité est de O(V + E * log(V))
