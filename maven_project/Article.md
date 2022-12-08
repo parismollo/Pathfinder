@@ -124,11 +124,25 @@ Tant que pq != ∅ faire
          enfiler(pq, (v, priorite))
          prev(v) ← u
 ```
-Le chemin le plus   court entre le sommet s et un sommet arrivée est 
+Le chemin le plus court entre le sommet s et un sommet arrivée est donné par  
 
 5. **Complexité de l'algorithme calculant le plus court chemin**
 
-Dans le pire des cas, l'algorithme va visiter tous les sommets, 
+Soit un graphe G = (V,E).
+Dans le pire des cas, l'algorithme va visiter tous les sommets, soit O(V).
+A chaque tour de boucle, on récupére le sommet avec la priorité la plus faible, ce qui ici se fait en O(log(V))
+avec une file de priorité.
+On compare la distance du sommet courant avec la distance de chacun de ses voisins dans le tableau distances.
+Chaque comparaison se fait en temps constant.
+Si la distance du voisin est la plus grande alors on va mettre à jour avec la distance du sommet courant plus un, 
+et ajouter ce sommet à la file de priorité.
+Il n'y a pas de poids et avec la file de priorité on regarde les sommets dans l'ordre de leur distance à la source, donc on ne va jamais modifié la distance à la source d'un sommet dont la distance n'est pas +infinie et donc on ne va jamais ajouté 2 fois un sommet à la file de priorité.
+Dans le pire cas on a donc O(V) tours de boucles, donc O(V) ajout/suppression dans la file qui se font en O(log(V)), et 2*E soit O(E) operations constantes (comparaison avec voisins) car on regarde chaque voisins pour chaque sommets ce qui est egale au nombre d'arêtes *2. 
+
+val retour Q4
+comme dans grille avec poids 1 y a pas O(E) mais O(V) vu qu'on va pas repasser par sommets deja mis dans file.
+Donc V * logV + E
+On se sert de grille pour calc naif, heuristic...
 
 On visite chaque noeud une fois O(|V|) et ensuite "relax" chaque voisin O(|E|), à chaque fois il doit acceder à file de priorité O(log V)
 
