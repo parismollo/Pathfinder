@@ -159,18 +159,21 @@ Par exemple elle peut renvoyer la valeur de la distance entre le sommet courant 
 ### 5. Complexité de l'algorithme calculant le plus court chemin
 
 Soit un graphe G = (V,E).
-|V| est le nombre de sommets (soit h*l dans une grille de hauteur h et longueur l) et |E| le nombre d'arêtes.
-On initialise les tableaux precedents et distances en temps O(|V|).
+Le graphe G représente une grille de longueur l et de hauteur h.
+|V| est le nombre de sommets (soit h * l) et |E| le nombre d'arêtes (soit (h+1) * l).
+On initialise les tableaux precedents et distances (qui designe la distance à la source de chaque sommet) en temps O(|V|).
 
-A chaque tour de boucle, on récupère le sommet avec la priorité la plus faible avec une file de priorité. On compare la distance du sommet courant avec la distance de chacun de ses voisins dans le tableau distances. Chaque comparaison se fait en temps constant. Si la distance du voisin est la plus grande alors on va mettre à jour avec la distance du sommet courant plus 1, et ajouter ce sommet à la file de priorité. Il n'y a pas de poids et avec la file de priorité on regarde les sommets dans l'ordre de leur distance à la source, donc on ne va jamais modifié plusieurs fois la distance à la source d'un sommet et donc on ne va jamais ajouté plus d'une fois un sommet à la file de priorité au cours de l'execution.
+A chaque tour de boucle, on récupère le sommet avec la priorité la plus faible avec une file de priorité. On compare la distance du sommet courant avec la distance de chacun de ses voisins dans le tableau distances. Chaque comparaison se fait en temps constant. 
+Si la distance du voisin est la plus grande alors on va la modifier et ajouter ce sommet à la file de priorité. 
+Il n'y a pas de poids et avec la file de priorité on regarde les sommets dans l'ordre de leur distance à la source, donc on ne va jamais modifié plusieurs fois la distance d'un sommet et donc on ne va jamais ajouté plus d'une fois un sommet à la file de priorité au cours de l'execution.
 
-Dans le pire des cas, l'algorithme va visiter tous les sommets, on a donc |V| tours de boucles, et |V| ajout/suppression dans la file qui se font en temps O(log(V)), et 2*E soit O(E) operations constantes car on compare les distances de tous les voisins pour chaque sommets ce qui est egale au nombre d'arêtes, |E| * 2.
+Dans le pire des cas, l'algorithme va visiter tous les sommets et les ajouter tous une fois dans la file. 
+On a donc |V| tours de boucles et |V| ajout/suppression dans la file qui se font en temps O(log(V)).
+On a aussi 2*E soit O(E) operations constantes car on compare les distances de tous les voisins pour chaque sommets.
 
 La complexité dans le pire des cas est donc de O(|V| + |V| * log(|V|) + |E|) soit O(|V| * log(|V|) + |E|). 
 La fonction heuristic n'est pas à prendre en compte ici car elle peut permettre une execution plus rapide mais ce n'est pas toujours le cas.
-
-On est dans une grille donc |E| c'est h+1 * l donc |V|*log(|V|) croit plus vite donc O(v * logv)
+De plus, le graphe G représente une grille donc |E| c'est (h+1) * l donc |V|*log(|V|) croit plus vite en l'infini donc la complexité de l'algorithme est O(v * logv).
 
 Une méthode naïve qui ferait la liste des chemins de la grille avant d’enlever ceux bloqués par des murs puis de prendre l’un des chemins restant de longueur minimale, serait de complexité :
 O($$\binom{h+l}{h}$$) dans le pire des cas car on fait la liste de tous les chemins possibles. Ce serait beaucoup moins efficaces.
-C'est tout ? O(h+l!) ?
