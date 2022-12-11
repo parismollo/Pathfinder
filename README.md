@@ -9,7 +9,7 @@ Projet Chemin, sujet 1
 
 ## Description du projet
 
-Le projet consiste en une application graphique. Dans cette application, une grille sera generée, puis un point de départ et un point d'arrivé seront placé dans cette grille par l'utilisateur. 
+Le projet consiste en une application graphique. Dans cette application, une grille sera generée, puis un point de départ et un point d'arrivée seront placés dans cette grille par l'utilisateur. 
 
 L'utilisateur pourra placer (ou pas) des murs qui vont bloquer un chemin dans la grille. 
 Ensuite l'utilisateur doit choisir un "algorithme de plus court chemin" parmis ceux qui seront proposés. Lorsque l'algorithme à été choisit, l'interface graphique affichera le chemin optimal calculé grâce à cette algorithme.
@@ -80,3 +80,6 @@ Note: Les  actions d'insertion sont faites à travers un clique gauche de la sou
    2. `D pour Djkistra`
    3. `G pour Greedy`
    4. Toute autre touche pour effacer le resultat du algorithme.
+  sur des graphes issus de grilles. : *Daniel Gilardoni*
+ 
+ Remarque : Greedy est implémenté car il calcul un chemin de maniére différente de A* et Dijkstra mais il ne trouve pas un plus court chemin dans tous les cas.
