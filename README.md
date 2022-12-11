@@ -14,7 +14,8 @@ Le projet consiste en une application graphique. Dans cette application, une gri
 L'utilisateur pourra placer (ou pas) des murs qui vont bloquer un chemin dans la grille. 
 Ensuite l'utilisateur doit choisir un "algorithme de plus court chemin" parmis ceux qui seront proposés. Lorsque l'algorithme à été choisit, l'interface graphique affichera le chemin optimal calculé grâce à cette algorithme.
 
-![Example](md5-projet-example.png)
+![Example](md5-projet-example.png)  
+*source: image produit par l'équipe G2S1*
 
 
 ## Table des matières
@@ -48,12 +49,8 @@ Une application graphique codé en java.
     - Greedy : *Daniel Gilardoni*   
     - A* : *Paris Mollo*    
     - Dijkstra : *Leopold Abignoli*   
-    - Eventuellement d'autres algorithmes ou variantes : *Daniel Gilardoni*   
   3. L'architecture du code : *Tous les membres*      
-  4. L'interface Graphique : *Leopold Abignoli* et *Paris Mollo*    
-  <!-- 5. Animations : *Leopold Abignoli* et *Paris Mollo*
-  6. Calculer et afficher la complexité des algorithmes dans le pire des cas, sachant que l’on travaille
-  sur des graphes issus de grilles. : *Daniel Gilardoni* -->
+  4. L'interface Graphique : *Leopold Abignoli* et *Paris Mollo*   
 
 ### Lancer application
 
@@ -80,6 +77,5 @@ Note: Les  actions d'insertion sont faites à travers un clique gauche de la sou
    2. `D pour Djkistra`
    3. `G pour Greedy`
    4. Toute autre touche pour effacer le resultat du algorithme.
-  sur des graphes issus de grilles. : *Daniel Gilardoni*
  
  Remarque : Greedy est implémenté car il calcul un chemin de maniére différente de A* et Dijkstra mais il ne trouve pas un plus court chemin dans tous les cas.

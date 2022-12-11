@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +19,7 @@ public class Window extends JFrame
 
 	public Window(int w, int h)
 	{
-		System.out.println("\u001b[32mProjet Path\u001b[0m\nPour lancer un algortihme, appuyer sur les touches suivantes:\n\u001b[31mA\u001b[0m - Astart\n\u001b[31mD\u001b[0m - Dijkstra\n\u001b[31mG\u001b[0m - Greedy\n\u001b[36mEspace\u001b[0m - efface contenu grille");
+		System.out.println("\n\u001b[32;1mProjet Path\u001b[0m\n\n\u001b[31mSélectionnez les points de départ et d'arrivée dans la grille\u001b[0m\u001b[0m\nPour lancer un algortihme, appuyer sur les touches suivantes:\n\u001b[31mA\u001b[0m - Astart\n\u001b[31mD\u001b[0m - Dijkstra\n\u001b[31mG\u001b[0m - Greedy\n\u001b[36mEspace\u001b[0m - efface contenu grille");
 
 		this.setMinimumSize(new Dimension(w, h));
 		this.setTitle("Path project");
@@ -54,18 +53,21 @@ public class Window extends JFrame
 				graph.resetShortPath();
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_A:
-						System.out.println("Choisie: \u001b[31mAStar\u001b[0m");
+						System.out.print("Choisie: \u001b[34mAStar\u001b[0m Complexité: \u001b[34mO(Vxlog(V))\u001b[0m");
 						Astar.run(graph);
 						break;
 					case KeyEvent.VK_D:
-						System.out.println("Choisie: \u001b[31mDijkstra\u001b[0m");
+						System.out.print("Choisie: \u001b[34mDijkstra\u001b[0m Complexité: \u001b[34mO(V+ElogV)\u001b[0m");
 						Dijkstra.run(graph);
 						break;
 					case KeyEvent.VK_G:
-						System.out.println("Choisie: \u001b[31mGreedy\u001b[0m");
+						System.out.print("Choisie: \u001b[34mGreedy\u001b[0m Complexité: \u001b[34mO(V+E)\u001b[0m");
 						Greedy.run(graph);
 						break;
 				}
+				int size = graph.getShorterPathSize();
+				if(size > 0)
+					System.out.println(" Path size: \u001b[34m"+size+"\u001b[0m");
 				gridView.revalidate();
 				gridView.repaint();
 			}
