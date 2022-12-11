@@ -20,6 +20,8 @@ public class Window extends JFrame
 
 	public Window(int w, int h)
 	{
+		System.out.println("\u001b[32mProjet Path\u001b[0m\nPour lancer un algortihme, appuyer sur les touches suivantes:\n\u001b[31mA\u001b[0m - Astart\n\u001b[31mD\u001b[0m - Dijkstra\n\u001b[31mG\u001b[0m - Greedy\n\u001b[36mEspace\u001b[0m - efface contenu grille");
+
 		this.setMinimumSize(new Dimension(w, h));
 		this.setTitle("Path project");
 		this.setLayout(new BorderLayout());
@@ -44,30 +46,28 @@ public class Window extends JFrame
 				if(gridView == null)
 					return;
 				Graph graph = gridView.getGraph();
-				if(graph.getStart() == null || graph.getEnd() == null)
+				if(graph.getStart() == null || graph.getEnd() == null) {
+					System.out.println("\u001b[33mAttention!\u001b[0m Aucun sommet de départ ou arrivé n'a été détecté");
 					return;
+				}
+					
 				graph.resetShortPath();
 				switch(e.getKeyCode()) {
 					case KeyEvent.VK_A:
+						System.out.println("Choisie: \u001b[31mAStar\u001b[0m");
 						Astar.run(graph);
 						break;
 					case KeyEvent.VK_D:
-						// Dijkstra
+						System.out.println("Choisie: \u001b[31mDijkstra\u001b[0m");
 						Dijkstra.run(graph);
 						break;
 					case KeyEvent.VK_G:
+						System.out.println("Choisie: \u001b[31mGreedy\u001b[0m");
 						Greedy.run(graph);
-						break;
-					case KeyEvent.VK_C:
-					case KeyEvent.VK_R:
-					case KeyEvent.VK_DELETE:
-						graph.resetShortPath();
-						gridView.repaint();
 						break;
 				}
 				gridView.revalidate();
 				gridView.repaint();
-				System.out.println("Taille du chemin: "+graph.getShorterPathSize());
 			}
 		});
 		this.requestFocus();

@@ -1,11 +1,11 @@
-# Trinôme
-identifiant : G2S1
-Paris Felipe Mollo Christondis
-Leopold Abignoli
-Daniel Gilardoni
-
 # Projet MD5
 Projet Chemin, sujet 1
+
+## Equipe
+**identifiant** : G2S1 
+* Daniel Gilardoni      
+* Felipe Paris Mollo Christondis      
+* Leopold Abignoli  
 
 ## Description du projet
 
@@ -17,7 +17,7 @@ Ensuite l'utilisateur doit choisir un "algorithme de plus court chemin" parmis c
 ![Example](md5-projet-example.png)
 
 
-## Table des matières :
+## Table des matières
 
 1. **Longueur et nombre de chemins de longueurs minimales dans une grille**  
 Étudier la longueur et le nombre de chemin de longueur minimale dans une grille
@@ -40,15 +40,43 @@ par des murs puis de prendre l’un des chemins restant de longueur minimale
 Assigné à *Paris Mollo* et *Daniel Gilardoni*
 
 ## Annexe
+
+### Description
 Une application graphique codé en java.
   1. Représentation des graphes (issue de grilles) dans le code : *Paris Mollo*
-  2. Algorithmes implémentés :
-    - Greedy : *Daniel Gilardoni*
-    - A* : *Paris Mollo*
-    - Dijkstra : *Leopold Abignoli*
-    - Eventuellement d'autres algorithmes ou variantes : *Daniel Gilardoni*
-  3. L'architecture du code : *Tous les membres*
-  4. L'interface Graphique : *Leopold Abignoli* et *Paris Mollo*
-  5. Animations : *Leopold Abignoli* et *Paris Mollo*
+  2. Algorithmes implémentés:    
+    - Greedy : *Daniel Gilardoni*   
+    - A* : *Paris Mollo*    
+    - Dijkstra : *Leopold Abignoli*   
+    - Eventuellement d'autres algorithmes ou variantes : *Daniel Gilardoni*   
+  3. L'architecture du code : *Tous les membres*      
+  4. L'interface Graphique : *Leopold Abignoli* et *Paris Mollo*    
+  <!-- 5. Animations : *Leopold Abignoli* et *Paris Mollo*
   6. Calculer et afficher la complexité des algorithmes dans le pire des cas, sachant que l’on travaille
-  sur des graphes issus de grilles. : *Daniel Gilardoni*
+  sur des graphes issus de grilles. : *Daniel Gilardoni* -->
+
+### Lancer application
+
+1. Installer [Maven](https://maven.apache.org/install.html)
+2. Déplacez dans le dossier du projet et génerez le fichier jar avec maven:
+
+```bash
+mvn package
+```
+3. Lancez le fichier jar
+```bash
+java -jar target/annexe.jar
+```
+
+### Comment utiliser l'application
+Note: Les  actions d'insertion sont faites à travers un clique gauche de la souris.
+
+1. Choisissez un point de départ (répresenté par la couleur **vert**)
+2. Choisissez un point d'arrivée (répresenté par la couleur **bleue**)
+3. Inseréz des murs (répresenté par la couleur **jaune**)
+   1. *Tenir la touche gauche de la souris appuyé afin de placer plusiers murs*
+4. Après avoir inséré le point de départ et d'arrivée, lancez l'algo avec les touches 
+   1. `A pour AStar`
+   2. `D pour Djkistra`
+   3. `G pour Greedy`
+   4. Toute autre touche pour effacer le resultat du algorithme.

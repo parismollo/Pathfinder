@@ -38,7 +38,7 @@ public class VertexView extends JPanel {
                 super.mousePressed(e);
                 Type state = gridView.getState();
                 if(!isStartOrEnd(state))
-                    if(vertex.getType() == Type.WALL || vertex.getType() == Type.PATH)
+                    if(vertex.isWall() || vertex.isPath())
                         gridView.setItemToDrag(vertex.getType() == Type.WALL ? Type.PATH : Type.WALL); // WALL OU PATH
                 refreshType();
                 repaint();
@@ -54,10 +54,10 @@ public class VertexView extends JPanel {
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
                 Type dragItem = gridView.getItemToDrag();
-                if(dragItem != Type.END && !isStartOrEnd(vertex.getType())) {
+                if(!(vertex.isShorterPath()) && dragItem != Type.END && !isStartOrEnd(vertex.getType())) {
                     vertex.setType(dragItem);
                     repaint();
-                }
+                }  
             }
 
         });
@@ -74,7 +74,8 @@ public class VertexView extends JPanel {
         // Si elle a été retiré, avant de pouvoir faire une autre action.
         if(gridView.putStartOrEnd() && vType != Type.PATH)
             return;
-
+        if(vertex.isShorterPath())   
+            return;
         gridView.setPutStartEnd(vType == Type.START || vType == Type.END);
         vertex.setType(vType == Type.PATH ? state : Type.PATH);
         gridView.setState(vType == Type.PATH ? (gridView.isFirstSteps() ? state : Type.WALL) : vType);              
