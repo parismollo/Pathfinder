@@ -33,7 +33,7 @@
 
 1. Cet article contient une annexe, un projet développé par l'équipe, qui démontre le fonctionnement des algorithmes mentionnés dans l'article. Pour accéder à cette annexe, voir le lien suivant: https://github.com/parismollo/MD5-Projet
 
-2. Pour afficher correctement le contenu de ce fichier, veuillez utiliser un éditeur de texte capable d'interpréter le démarquage "markdown". Sinon, voici un lien vers la version pdf de ce fichier: 
+2. Pour afficher correctement le contenu de ce fichier, veuillez utiliser un éditeur de texte capable d'interpréter le démarquage "markdown". Sinon, voici un lien vers la version pdf de ce fichier: https://github.com/parismollo/MD5-Projet/blob/main/Article.pdf
 
 
 ## Introduction
