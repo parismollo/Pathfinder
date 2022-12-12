@@ -7,7 +7,7 @@
   - [Questions](#questions)
     - [1. Longueur et nombre de chemins de longueurs minimales dans une grille](#1-longueur-et-nombre-de-chemins-de-longueurs-minimales-dans-une-grille)
       - [A) Longueur du chemin minimal](#a-longueur-du-chemin-minimal)
-      - [B) Nombres de chemins de longueur minimale](#b-nombres-de-chemins-de-longueur-minimale)
+      - [B) Nombre de chemins de longueur minimale](#b-nombre-de-chemins-de-longueur-minimale)
     - [2. Borne maximale du nombre de chemins dans une grille](#2-borne-maximale-du-nombre-de-chemins-dans-une-grille)
     - [3. L'algorithme de parcours en largeur](#3-lalgorithme-de-parcours-en-largeur)
       - [Type](#type)
@@ -16,7 +16,7 @@
       - [Pseudo code](#pseudo-code)
       - [Description](#description)
       - [Déroulement de l'algorithme](#déroulement-de-lalgorithme)
-    - [4. Programme calculant un des plus court chemin dans une grille](#4-programme-calculant-un-des-plus-court-chemin-dans-une-grille)
+    - [4. Programme calculant un des plus court chemins dans une grille](#4-programme-calculant-un-des-plus-court-chemins-dans-une-grille)
     - [5. Complexité de l'algorithme calculant le plus court chemin](#5-complexité-de-lalgorithme-calculant-le-plus-court-chemin)
   - [Bibliographie](#bibliographie)
 
@@ -31,7 +31,7 @@
 
 ## Instructions
 
-1. Cet article contient une annexe, un projet développé par l'équipe, qui démontre le fonctionnement des algorithmes mentionnés dans l'article. Pour accéder à cette annexe, voir le lien suivant: https://github.com/parismollo/MD5-Projet
+1. Cet article contient une annexe, un projet développé par l'équipe, qui montre certains algorithmes mentionnés dans l'article. Pour accéder à cette annexe, voir le lien suivant: https://github.com/parismollo/MD5-Projet
 
 2. Pour afficher correctement le contenu de ce fichier, veuillez utiliser un éditeur de texte capable d'interpréter le démarquage "markdown". Sinon, voici un lien vers la version pdf de ce fichier: https://github.com/parismollo/MD5-Projet/blob/main/Article.pdf
 
@@ -53,20 +53,20 @@ La taille d'un chemin est le nombre d'arêtes par lequel on doit passer pour all
 #### A) Longueur du chemin minimal
 
 Les coordonnées du point de départ sont $(x_1,y_1)$ et $(x_2,y_2)$ sont celles du point d'arrivée.
-On passe par $|x_1 - x_2|$ arêtes en lignes puis par $|y_1 - y_2|$ en colonne, depuis le point de depart pour atteindre le point d'arrivée.
-Un chemin minimal dans une grille sans murs, est donc de longueur :
+On passe par $|x_1 - x_2|$ arêtes en ligne puis par $|y_1 - y_2|$ en colonne, depuis le point de depart pour atteindre le point d'arrivée.
+Un chemin minimal dans une grille sans mur, est donc de longueur :
 $|x_1 - x_2| + |y_1 - y_2|$ (valeurs absolues).
 
 
-#### B) Nombres de chemins de longueur minimale
+#### B) Nombre de chemins de longueur minimale
 
 Si le point d'arrivée et de depart sont sur la même ligne $(y_1 = y_2)$ ou la même colonne $(x_1 = x_2)$ alors il n'y a qu'un chemin de longueur minimale.
 Si ce n'est pas le cas $(x_1 \ne x_2$ et $y_1 \ne y_2)$, alors, choisir un chemin de taille minimale c'est donc choisir $|x_1 - x_2|$ déplacements en abcisse et $|y_1 - y_2|$ deplacements en ordonnée dans l'ordre que l'on veut car il n'y a pas de murs.
-Cela revient à compter le nombre de mots différents de taille $|x_1 - x_2| + |y_1 - y_2|$, composés de $|x_1 - x_2|$ lettre $x$ et de $|y_1 - y_2|$ lettre $y$. Ce qui se calcule à l'aide du coeficient binomial.
+Cela revient à compter le nombre de mots différents de taille $|x_1 - x_2| + |y_1 - y_2|$, composés de $|x_1 - x_2|$ lettres $x$ et de $|y_1 - y_2|$ lettres $y$. Ce qui se calcule à l'aide du coeficient binomial.
 
 Le nombre de chemins de taille minimale possible est donc :  
 
-$$|x_1 - x_2| + |y_1 - y_2|! \over |x_1 - x_2|! \times |y_1 - y_2|!$$
+$$(|x_1 - x_2| + |y_1 - y_2|)! \over |x_1 - x_2|! \times |y_1 - y_2|!$$
 
 ou
 
@@ -130,7 +130,7 @@ Suivre le processus ci-dessous jusqu'à ce que la file d'attente soit vide :
 - Marquer ce sommet comme visité.
 - Insérer tous les voisins non visités du sommet dans la file d'attente.
 
-### 4. Programme calculant un des plus court chemin dans une grille
+### 4. Programme calculant un des plus court chemins dans une grille
 
 *Entrées* : Graphe orienté $G = (S, A)$ et un sommet s ∈ S, la source, et un sommet t ∈ S, l'arrivée.
 *Sorties* : Distance de s aux autres sommets
